@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nome', models.CharField(max_length=30)),
                 ('porte', models.CharField(choices=[('P', 'Pequeno'), ('M', 'Médio'), ('G', 'Grande')], max_length=1)),
-                ('especie', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dogs.especies')),
+                ('especie', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='animais.especies')),
             ],
         ),
     ]
