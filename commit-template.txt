@@ -1,4 +1,2 @@
 <TYPE>: <RESUMO>
 <TOPICOS>
-Antonio Pacheco
-$(date "+%Y-%m-%d %H:%M:%S")
