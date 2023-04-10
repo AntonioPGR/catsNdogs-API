@@ -4,6 +4,9 @@ from django.core.validators import MaxValueValidator
 class Especie(models.Model):
   nome = models.CharField(verbose_name="Nome", max_length=30, null=False, blank=False)
   
+  def __str__(self) -> str:
+    return self.nome
+  
 
 porte = (
   ("P", 'Pequeno'),
@@ -15,6 +18,9 @@ class Raca(models.Model):
   especie = models.ForeignKey(Especie, verbose_name="Espécie", on_delete=models.CASCADE, null=False, blank=False)
   porte = models.CharField(max_length=1, verbose_name="Porte", choices=porte, blank=False, null=False)
   
+  def __str__(self) -> str:
+    return self.nome
+
 
 opcoes_sexo = (
   ("M", "Masculino"),
@@ -45,4 +51,6 @@ class Animal(models.Model):
   foto = models.ImageField(upload_to="Animais/%Y/%m/%d", verbose_name="Foto do animal", null=False, blank=False)
   raca = models.ForeignKey(Raca, on_delete=models.SET_NULL, blank=True, null=True)
   
+  def __str__(self) -> str:
+    return self.nome
   
