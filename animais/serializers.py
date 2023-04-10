@@ -2,20 +2,21 @@ from rest_framework import serializers
 from animais.models import Animal, Especie, Raca
 
 
-class SerializerAnimal(serializers.ModelSerializer):
+ALL_FIELDS = '__all__'
+class AnimalSerializer(serializers.ModelSerializer):
   class Meta:
-    model = Animal,
-    fields = '__all__'
+    model = Animal
+    fields = ALL_FIELDS
     
 
-class SerializerEspecie(serializers.ModelSerializer):
+class EspecieSerializer(serializers.ModelSerializer):
   class Meta:
     model = Especie
-    fields = '__all__'
+    fields = ALL_FIELDS
 
 
-class SerializerRaca(serializers.ModelSerializer):
+class RacaSerializer(serializers.ModelSerializer):
   class Meta:
     model = Raca
-    fields = '__all__'
+    fields = ALL_FIELDS
     
