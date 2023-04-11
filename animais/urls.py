@@ -1,5 +1,5 @@
 from django.urls import path, include
-from animais.views import AnimaisViewSet, RacaViewSet, EspeciesViewSet
+from animais.views import AnimaisViewSet, RacaViewSet, EspeciesViewSet, AnimaisDaRacaXListView
 from rest_framework.routers import DefaultRouter
 
 
@@ -10,5 +10,6 @@ roteador_viewsets.register('racas', RacaViewSet, basename='racas')
 
 
 urlpatterns = [
-    path('', include(roteador_viewsets.urls))
+    path('', include(roteador_viewsets.urls)),
+    path('animais/raca/<int:racaID>', AnimaisDaRacaXListView.as_view(), name='animaisDaRaca')
 ]
