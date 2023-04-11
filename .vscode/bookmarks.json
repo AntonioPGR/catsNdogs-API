@@ -1,12 +1,12 @@
 {
 	"files": [
 		{
-			"path": "animais/serializers.py",
+			"path": "animais/views.py",
 			"bookmarks": [
 				{
-					"line": 21,
-					"column": 44,
-					"label": "Repensar nome"
+					"line": 7,
+					"column": 0,
+					"label": "Evitar repetições"
 				}
 			]
 		}
