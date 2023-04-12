@@ -5,38 +5,41 @@ from rest_framework.permissions import IsAuthenticated
 from animais.models import Animal, Raca, Especie
 from animais.serializers import AnimalSerializer, RacaSerializer, EspecieSerializer, AnimaisPorRacaSerializer, RacasPorEspecieSerializer
 
+class BaseAuthConfigs:
+  authentication_classes = [BasicAuthentication]
+  permission_classes = [IsAuthenticated]
+  
+  
+class BaseViewSet(BaseAuthConfigs, ModelViewSet):
+  pass
+  
 
-class EspeciesViewSet(ModelViewSet):
+class BaseListView(BaseAuthConfigs, ListAPIView):
+  pass
+
+
+# VIEWS RENDERIZADAS: / / / / / / / / / / / / / / / / / / / / / / / / / /
+class EspeciesViewSet(BaseViewSet):
   queryset = Especie.objects.all()
   serializer_class = EspecieSerializer
-  authentication_classes = [BasicAuthentication]
-  permission_classes = [IsAuthenticated]
 
   
-class RacaViewSet(ModelViewSet):
+class RacaViewSet(BaseViewSet):
   queryset = Raca.objects.all()
   serializer_class = RacaSerializer
-  authentication_classes = [BasicAuthentication]
-  permission_classes = [IsAuthenticated]
 
-class RacasPorEspecieListView(ListAPIView):
+class RacasPorEspecieListView(BaseListView):
+  serializer_class = RacasPorEspecieSerializer
   def get_queryset(self):
     return Raca.objects.filter(especie_id=self.kwargs['especieID'])
-  serializer_class = RacasPorEspecieSerializer
-  authentication_classes = [BasicAuthentication]
-  permission_classes = [IsAuthenticated]
 
 
-class AnimaisViewSet(ModelViewSet):
+class AnimaisViewSet(BaseViewSet):
   queryset = Animal.objects.all()
   serializer_class = AnimalSerializer
-  authentication_classes = [BasicAuthentication]
-  permission_classes = [IsAuthenticated]
 
 
-class AnimaisPorRacaListView(ListAPIView):
+class AnimaisPorRacaListView(BaseListView):
+  serializer_class = AnimaisPorRacaSerializer
   def get_queryset(self):
     return Animal.objects.filter(raca_id=self.kwargs['racaID'])
-  serializer_class = AnimaisPorRacaSerializer
-  authentication_classes = [BasicAuthentication]
-  permission_classes = [IsAuthenticated]

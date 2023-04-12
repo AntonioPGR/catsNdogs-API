@@ -5,6 +5,7 @@ from animais.models import Animal, Especie, Raca
 
 
 ALL_FIELDS = '__all__'
+NO_FIELDS = []
 class EspecieSerializer(serializers.ModelSerializer):
   class Meta:
     model = Especie
@@ -16,20 +17,16 @@ class RacaSerializer(serializers.ModelSerializer):
   porte = serializers.SerializerMethodField()
   class Meta:
     model = Raca
-    fields = ALL_FIELDS
+    exclude = NO_FIELDS
     
   def get_porte(self, obj):
     return obj.get_porte_display()
   
     
-class RacasPorEspecieSerializer(serializers.ModelSerializer):
-  porte = serializers.SerializerMethodField()
-  class Meta:
-    model = Raca
+class RacasPorEspecieSerializer(RacaSerializer):
+  especie = None
+  class Meta(RacaSerializer.Meta):
     exclude = ['especie']
-  
-  def get_porte(self, obj):
-    return obj.get_porte_display()
     
 
 class AnimalSerializer(serializers.ModelSerializer):
@@ -38,26 +35,21 @@ class AnimalSerializer(serializers.ModelSerializer):
   raca = serializers.ReadOnlyField(source='raca.nome')
   especie = serializers.ReadOnlyField(source='raca.especie.nome')
   porte = serializers.ReadOnlyField(source='raca.porte')
+  
   class Meta:
-    model = Animal
-    fields = ALL_FIELDS
-
-    
+      model = Animal
+      exclude = NO_FIELDS
+      read_only_fields = ('id',)
+      
   def get_sexo(self, obj):
-    return obj.get_sexo_display()
+      return obj.get_sexo_display()
+  
   def get_status(self, obj):
-    return obj.get_status_display()
+      return obj.get_status_display()
 
 
-class AnimaisPorRacaSerializer(serializers.ModelSerializer):
-  sexo = serializers.SerializerMethodField()
-  status = serializers.SerializerMethodField()
-  class Meta:
-    model = Animal
+class AnimaisPorRacaSerializer(AnimalSerializer):
+  raca = None
+  class Meta(AnimalSerializer.Meta):
     exclude = ['raca']
-    
-  def get_sexo(self, obj):
-    return obj.get_sexo_display()
-  def get_status(self, obj):
-    return obj.get_status_display()
 
