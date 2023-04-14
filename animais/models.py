@@ -42,7 +42,7 @@ class Animal(models.Model):
   nome = models.CharField(max_length=30, verbose_name="Nome", null=False, blank=False)
   sexo = models.CharField(max_length=1, verbose_name="Sexo", choices=opcoes_sexo, null=False, blank=False)
   cor = models.CharField(max_length=10, verbose_name="Cor", choices=opcoes_cores, null=False, blank=False)
-  idade = models.PositiveIntegerField(validators=[MaxValueValidator(99)], verbose_name="Idade", null=False, blank=False)
+  idade = models.PositiveIntegerField(verbose_name="Idade", null=False, blank=False)
   cidade = models.CharField(max_length=30, verbose_name="Cidade", blank=True, null=True)
   data_entrada = models.DateField(verbose_name="Data de entrada no abrigo", blank=True, null=True)
   descricao = models.TextField(max_length=2000, verbose_name="Descrição da história do animal", blank=False, null=False)
