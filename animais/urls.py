@@ -1,6 +1,6 @@
 from django.urls import path, include
 from animais.views import AnimaisViewSet, RacaViewSet, EspeciesViewSet, AnimaisPorRacaListView, RacasPorEspecieListView
-from rest_framework.routers import SimpleRouter
+from rest_framework.routers import SimpleRouter, DefaultRouter
 
 
 roteador_viewsets = SimpleRouter()
