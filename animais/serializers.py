@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from animais.models import Animal, Especie, Raca
-from animais.validators import Validator
+from animais.validators import AnimalValidador
 
 
 ALL_FIELDS = '__all__'
@@ -30,26 +30,12 @@ class AnimalSerializer(serializers.ModelSerializer):
     read_only_fields = ('id',)
   
   def validate(self, data_formulario):
-    self.achar_e_reportar_erro_de_dados(data_formulario)
+    AnimalValidador.validar_idade(data_formulario['idade'])
+    AnimalValidador.validar_cidade(data_formulario['cidade'])
+    AnimalValidador.validar_data_de_entrada(data_formulario['data_entrada'])
+    AnimalValidador.validar_telefone_contato(data_formulario['telefone_contato'])
     return data_formulario
-  
-  def achar_e_reportar_erro_de_dados(self, data_formulario):
-    if not Validator.esta_idade_correta(data_formulario['idade']):
-      raise serializers.ValidationError({
-        'idade':"A idade deve estar entre 0 e 100 anos!"
-      })
-    if not Validator.esta_cidade_correta(data_formulario['cidade']):
-      raise serializers.ValidationError({
-        "cidade": "Insira apenas o nome da cidade, sem numeros e/ou caracteres especiais!"
-      })
-    if not Validator.esta_data_de_entrada_correta(data_formulario['data_entrada']):
-      raise serializers.ValidationError({
-        "data_entrada": "A data de entrada no centro de resgate não pode ser no futuro!"
-      })
-    if not Validator.esta_telefone_correta(data_formulario['telefone']):
-      raise serializers.ValidationError({
-        "telefone": "O telefone deve conter 11 digitos"
-      })
+    
 
 class AnimaisPorRacaSerializer(AnimalSerializer):
   raca = None
