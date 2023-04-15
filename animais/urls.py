@@ -1,5 +1,5 @@
 from django.urls import path, include
-from animais.views import AnimaisViewSet, RacaViewSet, EspeciesViewSet, AnimaisPorRacaListView, RacasPorEspecieListView
+from animais.views import AnimaisViewSet, RacaViewSet, EspeciesViewSet
 from rest_framework.routers import SimpleRouter, DefaultRouter
 
 
@@ -10,6 +10,4 @@ roteador_viewsets.register('racas', RacaViewSet, basename='racas')
 
 urlpatterns = [
     path('', include(roteador_viewsets.urls)),
-    path('animais/raca/<int:racaID>/', AnimaisPorRacaListView.as_view(), name='animaisDaRaca'),
-    path('racas/especie/<int:especieID>/', RacasPorEspecieListView.as_view(), name='racasDaEspecie')
 ]

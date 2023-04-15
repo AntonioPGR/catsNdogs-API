@@ -6,6 +6,7 @@ class AdminEspecie(admin.ModelAdmin):
   list_display_links = ('nome', )
   search_fields = ('nome',)
   list_per_page = 20
+  ordering = ('nome',)
 admin.site.register(Especie, AdminEspecie)
 
 
@@ -15,6 +16,7 @@ class AdminRaca(admin.ModelAdmin):
   list_filter = ('especie', 'porte',)
   search_fields = ('nome',)
   list_per_page = 20
+  ordering = ('nome',)
 admin.site.register(Raca, AdminRaca)
 
 class AdminAnimal(admin.ModelAdmin):
@@ -22,5 +24,6 @@ class AdminAnimal(admin.ModelAdmin):
   list_display_links = ('nome', 'raca')
   list_filter = ('raca', 'cor', 'status', 'sexo')
   search_fields = ('nome',)
+  ordering = ('nome',)
   list_per_page = 20
 admin.site.register(Animal, AdminAnimal)
