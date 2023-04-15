@@ -26,7 +26,7 @@ def criar_animal_falso(fake_generator):
   descricao = fake_generator.text()
   telefone_contato = "{} 9{}-{}".format(randint(10, 99), randint(1000, 9999), randint(1000, 9999))
   status = fake_generator.random_element(elements=tupla_para_range(opcoes_status))
-  foto = "Animais\2023\04\13\doguinho.jpg"
+  foto = "Animais\/2023/04/13/doguinho.jpg"
   raca = Raca.objects.order_by('?').first()
   return Animal(
     nome=nome, 
