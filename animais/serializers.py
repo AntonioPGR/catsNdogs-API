@@ -15,12 +15,6 @@ class RacaSerializer(serializers.ModelSerializer):
   class Meta:
     model = Raca
     exclude = NO_FIELDS
-  
-    
-class RacasPorEspecieSerializer(RacaSerializer):
-  especie = None
-  class Meta(RacaSerializer.Meta):
-    exclude = ['especie']
     
 
 class AnimalSerializer(serializers.ModelSerializer):  
@@ -35,10 +29,7 @@ class AnimalSerializer(serializers.ModelSerializer):
     AnimalValidador.validar_data_de_entrada(data_formulario['data_entrada'])
     AnimalValidador.validar_telefone_contato(data_formulario['telefone_contato'])
     return data_formulario
-    
-
-class AnimaisPorRacaSerializer(AnimalSerializer):
-  raca = None
+class AnimalSerializerV2(AnimalSerializer):
   class Meta(AnimalSerializer.Meta):
-    exclude = ['raca']
+    exclude = ['cidade', 'telefone_contato']
 
