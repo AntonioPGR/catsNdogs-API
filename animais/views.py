@@ -1,9 +1,19 @@
 from rest_framework.viewsets import ModelViewSet
 from animais.models import Animal, Raca, Especie
 from animais.serializers import AnimalSerializer, AnimalSerializerV2, RacaSerializer, EspecieSerializer
+from rest_framework.response import Response
+from rest_framework.status import HTTP_201_CREATED
+
 
 class BaseViewConfigs(ModelViewSet):
-  pass
+  def create(self, request):
+    serializer = self.serializer_class(data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      response = Response(serializer.data, status=HTTP_201_CREATED)
+      id = str(serializer.data['id'])
+      response['location'] = request.build_absolute_uri() + id
+      return response
   
 
 
@@ -14,7 +24,7 @@ class EspeciesViewSet(BaseViewConfigs):
   search_fields = FIELDS
   queryset = Especie.objects.all()
   serializer_class = EspecieSerializer
-  http_method_names = ['get', 'post ']
+  http_method_names = ['get', 'post']
 
 
 class RacaViewSet(BaseViewConfigs):
