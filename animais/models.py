@@ -48,7 +48,7 @@ class Animal(models.Model):
   descricao = models.TextField(max_length=2000, verbose_name="Descrição da história do animal", blank=False, null=False)
   telefone_contato = models.CharField(max_length=13, unique=True, verbose_name="Telefone para contato", blank=True, null=True)
   status = models.CharField(max_length=1, verbose_name="Status de adoção", choices=opcoes_status, blank=False, null=False)
-  foto = models.ImageField(upload_to="Animais/%Y/%m/%d", verbose_name="Foto do animal", null=False, blank=False)
+  foto = models.ImageField(upload_to="Animais/%Y/%m/%d", verbose_name="Foto do animal", blank=True, default='/media/Animais/2023/04/13/doguinho.jpg')
   raca = models.ForeignKey(Raca, on_delete=models.SET_NULL, blank=True, null=True)
   
   def __str__(self) -> str:
