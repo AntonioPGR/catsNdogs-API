@@ -3,6 +3,8 @@ from animais.models import Animal, Raca, Especie
 from animais.serializers import AnimalSerializer, AnimalSerializerV2, RacaSerializer, EspecieSerializer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 
 class BaseViewConfigs(ModelViewSet):
@@ -26,6 +28,10 @@ class EspeciesViewSet(BaseViewConfigs):
   serializer_class = EspecieSerializer
   http_method_names = ['get', 'post']
 
+  #CACHE
+  @method_decorator(cache_page(30))
+  def dispatch(self, *args, **kwargs):
+    return super(EspeciesViewSet, self).dispatch(*args, **kwargs)
 
 class RacaViewSet(BaseViewConfigs):
   FIELDS = ('nome',)
