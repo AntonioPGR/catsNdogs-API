@@ -4,9 +4,9 @@ from rest_framework.routers import DefaultRouter
 
 
 roteador_viewsets = DefaultRouter()
-roteador_viewsets.register(r'animais/(?P<version>(v1|v2))', AnimaisViewSet, basename='animais')
-roteador_viewsets.register('especies', EspeciesViewSet, basename='especies')
-roteador_viewsets.register('racas', RacaViewSet, basename='racas')
+roteador_viewsets.register('especies', EspeciesViewSet, basename='Especies')
+roteador_viewsets.register('racas', RacaViewSet, basename='Racas')
+roteador_viewsets.register(r'animais/(?P<version>(v1|v2))', AnimaisViewSet, basename='Animais')
 
 urlpatterns = [
     path('', include(roteador_viewsets.urls)),
