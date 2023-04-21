@@ -2,9 +2,8 @@ from rest_framework.test import APITestCase
 from animais.models import Especie
 from django.urls import reverse
 from rest_framework import status
-from os.path import join
 
-class EspecieTestCase(APITestCase):
+class RequisicoesParaEspecieTestCase(APITestCase):
   
   def setUp(self):
     self.list_url = reverse('Especies-list')

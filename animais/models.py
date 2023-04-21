@@ -16,7 +16,7 @@ porte = (
 class Raca(models.Model):
   nome = models.CharField(verbose_name="Nome", unique=True, max_length=30, null=False, blank=False)
   especie = models.ForeignKey(Especie, verbose_name="Espécie", on_delete=models.CASCADE, null=False, blank=False)
-  porte = models.CharField(max_length=1, verbose_name="Porte", choices=porte, blank=False, null=False)
+  porte = models.CharField(max_length=1, verbose_name="Porte", choices=porte, blank=False, null=False, default='P')
   
   def __str__(self) -> str:
     return self.nome
@@ -40,14 +40,14 @@ opcoes_status = (
 )
 class Animal(models.Model):
   nome = models.CharField(max_length=30, verbose_name="Nome", null=False, blank=False)
-  sexo = models.CharField(max_length=1, verbose_name="Sexo", choices=opcoes_sexo, null=False, blank=False)
-  cor = models.CharField(max_length=10, verbose_name="Cor", choices=opcoes_cores, null=False, blank=False)
+  sexo = models.CharField(max_length=1, verbose_name="Sexo", choices=opcoes_sexo, null=False, blank=False, default='M')
+  cor = models.CharField(max_length=10, verbose_name="Cor", choices=opcoes_cores, null=False, blank=False, default='preto')
   idade = models.PositiveIntegerField(verbose_name="Idade", null=False, blank=False)
   cidade = models.CharField(max_length=30, verbose_name="Cidade", blank=True, null=True)
   data_entrada = models.DateField(verbose_name="Data de entrada no abrigo", blank=True, null=True)
   descricao = models.TextField(max_length=2000, verbose_name="Descrição da história do animal", blank=False, null=False)
   telefone_contato = models.CharField(max_length=13, unique=True, verbose_name="Telefone para contato", blank=True, null=True)
-  status = models.CharField(max_length=1, verbose_name="Status de adoção", choices=opcoes_status, blank=False, null=False)
+  status = models.CharField(max_length=1, verbose_name="Status de adoção", choices=opcoes_status, blank=False, null=False, default='D')
   foto = models.ImageField(upload_to="Animais/%Y/%m/%d", verbose_name="Foto do animal", blank=True, default='/media/Animais/2023/04/13/doguinho.jpg')
   raca = models.ForeignKey(Raca, on_delete=models.SET_NULL, blank=True, null=True)
   
