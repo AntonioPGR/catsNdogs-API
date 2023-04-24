@@ -2,7 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 from animais.models import Animal, Raca, Especie
 from animais.serializers import AnimalSerializer, AnimalSerializerV2, RacaSerializer, EspecieSerializer
 from rest_framework.response import Response
-from rest_framework.status import HTTP_201_CREATED
+from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
@@ -16,7 +16,6 @@ class BaseViewConfigs(ModelViewSet):
       id = str(serializer.data['id'])
       response['location'] = request.build_absolute_uri() + id
       return response
-  
 
 
 # VIEWS RENDERIZADAS: / / / / / / / / / / / / / / / / / / / / / / / / / /
