@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_filters',
     "corsheaders",
     # 'admin_honeypot',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
